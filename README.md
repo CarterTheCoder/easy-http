@@ -12,7 +12,6 @@ to run:
     $ cd release
     $ ./easy-http
 ### Config:
-Place your HTML files in the html directory.
 The root URI (e.g. localhost:8080/) will always serve index.html from the specified root directory.
 The default configuration file is located at:
 
