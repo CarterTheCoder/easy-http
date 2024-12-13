@@ -26,10 +26,10 @@ impl ::std::default::Default for Config {
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let cfg: Config = confy::load("easy-http", None)?;
-    let listener = TcpListener::bind(&cfg.bind_to).unwrap();
+    let listener = TcpListener::bind(&cfg.bind_to).expect("Failed to bind to IP!");
 
     for stream in listener.incoming() {
-        let stream = stream.unwrap();
+        let stream = stream.expect("Could not handle connection!");
         handle_connection(stream, &cfg);
     }
     
@@ -54,11 +54,11 @@ fn handle_connection(mut stream: TcpStream, cfg: &Config) {
         }
     };
 
-    let contents = fs::read_to_string(filename).unwrap();
+    let contents = fs::read_to_string(filename).expect("Failed to read file!");
     let length = contents.len();
 
     let response = format!("{status_line}\r\nContent-Length: {length}\r\n\r\n{contents}");
 
-    stream.write_all(response.as_bytes()).unwrap();
+    stream.write_all(response.as_bytes()).expect("Failed to write to stream!");
 }
 
