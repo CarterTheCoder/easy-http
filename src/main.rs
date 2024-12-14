@@ -3,6 +3,7 @@ use std::{
     net::{TcpListener, TcpStream},
     fs,
     path::Path,
+    time::Instant,
 };
 
 use serde_derive::{Serialize, Deserialize};
@@ -12,6 +13,7 @@ struct Config {
     bind_to: String,
     html_path: String,
     not_found_path: String,
+    debug: bool,
 }
 
 impl ::std::default::Default for Config {
@@ -20,6 +22,7 @@ impl ::std::default::Default for Config {
             bind_to: "127.0.0.1:8080".to_string(),
             html_path: "html".to_string(),
             not_found_path: "404.html".to_string(),
+            debug: false,
         }
     }
 }
@@ -29,8 +32,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let listener = TcpListener::bind(&cfg.bind_to).expect("Failed to bind to IP!");
 
     for stream in listener.incoming() {
+        let now = Instant::now();
+
         let stream = stream.expect("Could not handle connection!");
         handle_connection(stream, &cfg);
+
+        let elapsed_time = now.elapsed();
+        if cfg.debug {
+            println!("Request took {:#?}", elapsed_time);
+        };
     }
     
     Ok(())
