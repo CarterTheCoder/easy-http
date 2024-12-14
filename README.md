@@ -21,4 +21,6 @@ and should look like this:
     bind_to = '127.0.0.1:8080' # What the server should bind to, e.g. 192.168.1.100:8080
     html_path = 'html' # The root directory from which HTML files should be served
     not_found_path = '404.html' # The path to the 404 HTML file
+    debug = false # true or false
+Debug mode currently outputs how long an HTTP request took to process.
 Change these options as needed.
