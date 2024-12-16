@@ -5,6 +5,7 @@
 Clone the repository and run with:
 
     $ git clone https://github.com/CarterTheCoder/easy-http.git
+    $ cd easy-http
     $ cargo run
     
 ### Config:
