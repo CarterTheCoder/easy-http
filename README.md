@@ -2,15 +2,11 @@
 ### An easy HTTP server for static HTML sites.
 
 ### Usage:
-Clone the repository and build with:
+Clone the repository and run with:
 
     $ git clone https://github.com/CarterTheCoder/easy-http.git
-    $ cargo build
-to run:
-
-    $ cd target
-    $ cd release
-    $ ./easy-http
+    $ cargo run
+    
 ### Config:
 The root URI (e.g. localhost:8080/) will always serve index.html from the specified root directory.
 The default configuration file is located at:
